@@ -1,19 +1,53 @@
-import java.awt.Color;
+package domain;
 
-public abstract class Planeta {
+import java.awt.Color;
+import java.awt.Graphics;
+import java.util.Random;
+
+import ui.Juego;
+
+public class Planeta {
+    protected int alto = 100; 
+    protected int ancho = 100; 
+
     protected int x; 
     protected int y; 
 
-    protected boolean relleno; 
     protected Color color; 
+    protected boolean relleno;
 
-    protected int animacion; 
+    protected Random random = new Random(); 
 
-    public Planeta(int x, int y, boolean relleno, Color color, int animacion){
-        this.x = x; 
-        this.y = y; 
+    public Planeta(int x, boolean relleno, int y, Color color){
+        
+        if (x == -1 || y == -1){
+            this.x = random.nextInt(Juego.ANCHO);
+            this.y = random.nextInt(Juego.ALTO);
+        } else {
+            this.x = x; 
+            this.y = y; 
+        }
+        
         this.relleno = relleno; 
         this.color = color; 
-        this.animacion = animacion; 
+    }
+
+    public Color getColor(){
+        return color;
+    }
+
+    public void paint(Graphics g){
+        g.setColor(color);
+        if (relleno){
+            g.fillOval(x, y, ancho, alto);
+        } else {
+            g.drawOval(x, y, ancho, alto);
+        }
+    }
+
+    @Override
+    public String toString(){
+        return "x: " + x + " y: " + y 
+        + " relleno: " + relleno + " color: " + color; 
     }
 }

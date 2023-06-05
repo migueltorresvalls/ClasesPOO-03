@@ -1,3 +1,5 @@
+package domain;
+
 public class Funcion
 {
     public static double[][] generarPuntos(int x, int y, int fps)
